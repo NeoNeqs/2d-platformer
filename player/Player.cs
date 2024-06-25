@@ -1,39 +1,46 @@
 using Godot;
-using System;
 
-public partial class Player : CharacterBody2D
-{
-	private const float Speed = 120.0f;
-	private const float JumpVelocity = -320.0f;
+namespace Platformer;
 
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+public partial class Player : CharacterBody2D {
+    private const float Speed = 120.0f;
+    private const float JumpVelocity = -220.0f;
+    private const float MinJumpVelocity = -70f;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Vector2 velocity = Velocity;
+    // Get the gravity from the project settings to be synced with RigidBody nodes.
+    private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-		// Add the gravity.
-		if (!IsOnFloor())
-			velocity.Y += _gravity * (float)delta;
+    public override void _PhysicsProcess(double delta) {
+        Vector2 velocity = Velocity;
 
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-			velocity.Y = JumpVelocity;
+        // Add the gravity.
+        if (IsOnFloor()) {
+            if (Input.IsActionPressed("ui_accept")) {
+                velocity.Y = JumpVelocity;
+            }
+        } else {
+            GetNode<AnimatedSprite2D>("Sprite").Play("Jump");
+            velocity.Y += _gravity * (float)delta;
+            if (Input.IsActionJustPressed("ui_accept") && velocity.Y < MinJumpVelocity) {
+                velocity.Y = MinJumpVelocity;
+            }
+            velocity.Y -= 8;
+        }
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		float direction = Input.GetAxis("left", "right");
-		if (direction != 0)
-		{
-			velocity.X = direction * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		}
+        
+        // Get the input direction and handle the movement/deceleration.
+        float direction = Input.GetAxis("left", "right");
+        if (direction != 0) {
+            velocity.X = Mathf.MoveToward(Velocity.X, Speed * direction, 40);
+            GetNode<AnimatedSprite2D>("Sprite").Play("Run");
+            GD.Print(GetNode<AnimatedSprite2D>("Sprite").Animation);
+            GetNode<AnimatedSprite2D>("Sprite").FlipH = direction > 0;
+        } else {
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+            GetNode<AnimatedSprite2D>("Sprite").Play("Idle");
+        }
 
-		Velocity = velocity;
-		MoveAndSlide();
-	}
+        Velocity = velocity;
+        MoveAndSlide();
+    }
 }
