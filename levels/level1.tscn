@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyiw6y1fgbnn7"]
+
+[ext_resource type="TileSet" uid="uid://db5p5nw5mbdnb" path="res://assets/kenney-platformer/tilemap.tres" id="1_hh47d"]
+[ext_resource type="PackedScene" uid="uid://cv3tj5hwyaagd" path="res://player/player.tscn" id="2_6p8aq"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_hh47d")
+format = 2
+layer_0/tile_data = PackedInt32Array(262146, 65536, 0, 262147, 131072, 0, 262148, 131072, 0, 262149, 131072, 0, 262150, 131072, 0, 262151, 196608, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_6p8aq")]
+position = Vector2(86, 20)
