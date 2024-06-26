@@ -3,10 +3,13 @@ using Godot;
 namespace Platformer;
 
 public partial class Player : CharacterBody2D {
+    
     private const float Speed = 120.0f;
-    private const float JumpVelocity = -220.0f;
+    private const float JumpVelocity = -200.0f;
     private const float MinJumpVelocity = -70f;
 
+    private ushort _coins;
+    
     // Get the gravity from the project settings to be synced with RigidBody nodes.
     private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -15,7 +18,7 @@ public partial class Player : CharacterBody2D {
 
         // Add the gravity.
         if (IsOnFloor()) {
-            if (Input.IsActionPressed("ui_accept")) {
+            if (Input.IsActionJustPressed("ui_accept")) {
                 velocity.Y = JumpVelocity;
             }
         } else {
@@ -26,14 +29,12 @@ public partial class Player : CharacterBody2D {
             }
             velocity.Y -= 8;
         }
-
         
         // Get the input direction and handle the movement/deceleration.
         float direction = Input.GetAxis("left", "right");
         if (direction != 0) {
             velocity.X = Mathf.MoveToward(Velocity.X, Speed * direction, 40);
             GetNode<AnimatedSprite2D>("Sprite").Play("Run");
-            GD.Print(GetNode<AnimatedSprite2D>("Sprite").Animation);
             GetNode<AnimatedSprite2D>("Sprite").FlipH = direction > 0;
         } else {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
@@ -42,5 +43,13 @@ public partial class Player : CharacterBody2D {
 
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    public override void _ExitTree() {
+        GD.Print("DIED");
+    }
+
+    public void AddCoin() {
+        _coins++;
     }
 }

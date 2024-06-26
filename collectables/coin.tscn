@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://deo3ifbhmrxxf"]
+
+[ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="1_644xh"]
+[ext_resource type="Script" path="res://collectables/Coin.cs" id="1_ue26p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3utbu"]
+atlas = ExtResource("1_644xh")
+region = Rect2(198, 126, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wm5cg"]
+atlas = ExtResource("1_644xh")
+region = Rect2(216, 126, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o1f8a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3utbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wm5cg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emksw"]
+
+[node name="Coin" type="Area2D"]
+script = ExtResource("1_ue26p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o1f8a")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_emksw")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwro0nn57pnve"]
+
+[ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="1_l2216"]
+[ext_resource type="Script" path="res://enemies/Spike.cs" id="1_psjxq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8l1g"]
+atlas = ExtResource("1_l2216")
+region = Rect2(144, 54, 18, 18)
+
+[node name="Spike" type="Area2D"]
+script = ExtResource("1_psjxq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_i8l1g")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, 9, 7, 9, 7, 6, 5, 2, -5, 2, -7, 6)
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
