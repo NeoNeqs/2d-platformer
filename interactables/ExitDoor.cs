@@ -1,14 +1,14 @@
 using Godot;
+using System;
+using Platformer;
 
-namespace Platformer;
+public partial class ExitDoor : Area2D {
 
-public partial class Coin : Area2D {
     private void OnBodyEntered(Node2D node) {
         if (node is not Player player) {
             return;
         }
 
-        player.AddCoin();
-        QueueFree();
+        player.AdvanceLevel();
     }
 }

@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4f3y4ftjp7pu"]
+
+[ext_resource type="Script" path="res://enemies/Enemy.cs" id="1_i4ed3"]
+[ext_resource type="Texture2D" uid="uid://c0rrh4wm1vc5y" path="res://assets/kenney-platformer/tilemap-characters_packed.png" id="2_dtiy1"]
+[ext_resource type="PackedScene" uid="uid://ddc6gi1bxa6of" path="res://hitbox.tscn" id="3_3568l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vha5"]
+atlas = ExtResource("2_dtiy1")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he21m"]
+atlas = ExtResource("2_dtiy1")
+region = Rect2(96, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18pm4"]
+atlas = ExtResource("2_dtiy1")
+region = Rect2(144, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4em6f"]
+atlas = ExtResource("2_dtiy1")
+region = Rect2(168, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qhsk7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vha5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he21m")
+}],
+"loop": true,
+"name": &"Flat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18pm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4em6f")
+}],
+"loop": true,
+"name": &"Spikey",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxolw"]
+size = Vector2(13, 10)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_i4ed3")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qhsk7")
+animation = &"Spikey"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-1, 7)
+shape = SubResource("RectangleShape2D_hxolw")
+
+[node name="LeftLedgeCheck" type="RayCast2D" parent="."]
+position = Vector2(-7, 11)
+target_position = Vector2(0, 10)
+
+[node name="RightLedgeCheck" type="RayCast2D" parent="."]
+position = Vector2(6, 11)
+target_position = Vector2(0, 10)
+
+[node name="Hitbox" parent="." instance=ExtResource("3_3568l")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(-1, -4, -2, -2, -4, 1, -6, 3, -6, 10, 5, 10, 5, 3, 3, 1, 1, -2, 0, -4)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://lqy6l11h24rj"]
+
+[ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="1_mlq4e"]
+[ext_resource type="Script" path="res://collectables/Key.cs" id="1_s2j7c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twguh"]
+atlas = ExtResource("1_mlq4e")
+region = Rect2(126, 18, 18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8b5uq"]
+size = Vector2(20, 12)
+
+[node name="Key" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_s2j7c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_twguh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8b5uq")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

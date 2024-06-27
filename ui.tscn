@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://l2br4kqnwn8q"]
+
+[ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="1_bxugl"]
+[ext_resource type="Script" path="res://UI.cs" id="1_mpqb0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5rxf"]
+atlas = ExtResource("1_bxugl")
+region = Rect2(198, 126, 18, 18)
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mpqb0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="CoinCount" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_p5rxf")
+expand_mode = 2
