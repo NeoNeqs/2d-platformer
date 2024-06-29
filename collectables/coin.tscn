@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://deo3ifbhmrxxf"]
+[gd_scene load_steps=9 format=3 uid="uid://deo3ifbhmrxxf"]
 
 [ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="1_644xh"]
 [ext_resource type="Script" path="res://collectables/Coin.cs" id="1_ue26p"]
@@ -26,6 +26,29 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_emksw"]
+size = Vector2(18, 18)
+
+[sub_resource type="Animation" id="Animation_bpaws"]
+resource_name = "default"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o04o5"]
+_data = {
+"default": SubResource("Animation_bpaws")
+}
 
 [node name="Coin" type="Area2D"]
 collision_mask = 2
@@ -37,5 +60,10 @@ autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_emksw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_o04o5")
+}
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

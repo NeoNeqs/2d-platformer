@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkduhgxk3nn58"]
+
+[ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="1_02scu"]
+[ext_resource type="Script" path="res://interactables/Checkpoint.cs" id="1_fr577"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il68i"]
+atlas = ExtResource("1_02scu")
+region = Rect2(198, 90, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyq2f"]
+atlas = ExtResource("1_02scu")
+region = Rect2(216, 90, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_28832"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il68i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyq2f")
+}],
+"loop": true,
+"name": &"Wave",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17bsl"]
+atlas = ExtResource("1_02scu")
+region = Rect2(198, 108, 18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejqyi"]
+size = Vector2(26, 36)
+
+[node name="Checkpoint" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_fr577")
+
+[node name="Flag" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_28832")
+animation = &"Wave"
+autoplay = "Wave"
+
+[node name="Pole" type="Sprite2D" parent="."]
+position = Vector2(0, 9)
+texture = SubResource("AtlasTexture_17bsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ejqyi")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

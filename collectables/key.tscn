@@ -15,9 +15,11 @@ collision_mask = 2
 script = ExtResource("1_s2j7c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.66, 0.60071, 0.1518, 1)
 texture = SubResource("AtlasTexture_twguh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_8b5uq")
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

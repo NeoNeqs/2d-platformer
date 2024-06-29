@@ -8,25 +8,16 @@ atlas = ExtResource("1_k318b")
 region = Rect2(108, 18, 18, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3ph7"]
-size = Vector2(20, 18)
+size = Vector2(18, 17)
 
-[node name="MoveableBox" type="RigidBody2D"]
+[node name="MoveableBox" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
-mass = 1000.0
-inertia = 1000.0
-can_sleep = false
-lock_rotation = true
-contact_monitor = true
-linear_damp = 4.0
-constant_torque = 100.0
 script = ExtResource("1_u4qff")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_ml6v8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_b3ph7")
-
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
-[connection signal="body_exited" from="." to="." method="OnBodyExited"]
