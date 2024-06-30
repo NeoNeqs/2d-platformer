@@ -7,7 +7,9 @@
 atlas = ExtResource("1_bxugl")
 region = Rect2(198, 126, 18, 18)
 
-[node name="UI" type="Control"]
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mpqb0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -26,11 +28,11 @@ offset_bottom = 40.0
 grow_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="CoinCount" type="Label" parent="HBoxContainer"]
+[node name="CoinCount" type="Label" parent="UI/HBoxContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_p5rxf")
 expand_mode = 2

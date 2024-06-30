@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/Enemy.cs" id="1_i4ed3"]
 [ext_resource type="Texture2D" uid="uid://c0rrh4wm1vc5y" path="res://assets/kenney-platformer/tilemap-characters_packed.png" id="2_dtiy1"]
-[ext_resource type="PackedScene" uid="uid://ddc6gi1bxa6of" path="res://hitbox.tscn" id="3_3568l"]
+[ext_resource type="PackedScene" uid="uid://ddc6gi1bxa6of" path="res://misc/hitbox.tscn" id="3_3568l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1vha5"]
 atlas = ExtResource("2_dtiy1")

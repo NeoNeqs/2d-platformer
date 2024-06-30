@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using Platformer;
 
 public partial class ExitDoor : Area2D {
@@ -8,7 +7,6 @@ public partial class ExitDoor : Area2D {
         if (node is not Player player) {
             return;
         }
-
-        player.AdvanceLevel();
+        player.Level.AdvanceLevel();
     }
 }
