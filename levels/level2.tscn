@@ -168,7 +168,7 @@ _direction = Vector2(-1, 0)
 position = Vector2(1251, 144)
 
 [node name="Player" parent="." instance=ExtResource("2_o1djl")]
-position = Vector2(1176, -50)
+position = Vector2(56, 75)
 floor_constant_speed = true
 
 [node name="Void" parent="." instance=ExtResource("3_7s7df")]
