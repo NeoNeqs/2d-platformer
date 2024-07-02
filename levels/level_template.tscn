@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://whkyu2cn501x"]
+
+[ext_resource type="Script" path="res://levels/Level.cs" id="1_ajxyh"]
+[ext_resource type="TileSet" uid="uid://db5p5nw5mbdnb" path="res://assets/kenney-platformer/tilemap.tres" id="2_d828o"]
+[ext_resource type="PackedScene" uid="uid://cv3tj5hwyaagd" path="res://player/player.tscn" id="3_u35pw"]
+[ext_resource type="PackedScene" uid="uid://jchqmxlal2r6" path="res://misc/void.tscn" id="4_ti4f3"]
+
+[node name="LevelX" type="Node2D"]
+script = ExtResource("1_ajxyh")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_d828o")
+format = 2
+
+[node name="Player" parent="." instance=ExtResource("3_u35pw")]
+
+[node name="Void" parent="." instance=ExtResource("4_ti4f3")]

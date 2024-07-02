@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cv3tj5hwyaagd"]
+[gd_scene load_steps=14 format=3 uid="uid://cv3tj5hwyaagd"]
 
 [ext_resource type="Script" path="res://player/Player.cs" id="1_0gve2"]
 [ext_resource type="Texture2D" uid="uid://c0rrh4wm1vc5y" path="res://assets/kenney-platformer/tilemap-characters_packed.png" id="1_c22x8"]
 [ext_resource type="Script" path="res://fsm/FiniteStateMachine.cs" id="3_5djxm"]
 [ext_resource type="Script" path="res://fsm/states/MovementState.cs" id="4_6q5dh"]
 [ext_resource type="Script" path="res://fsm/states/ClimbingState.cs" id="5_0xbh4"]
+[ext_resource type="Script" path="res://fsm/states/JumpBoostState.cs" id="6_w5aa8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xmqu"]
 atlas = ExtResource("1_c22x8")
@@ -55,6 +56,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4353c"]
 size = Vector2(12, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqvg5"]
+size = Vector2(12, 2)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
@@ -78,22 +82,24 @@ limit_bottom = 200
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="LadderRay" type="RayCast2D" parent="."]
-position = Vector2(0, -8)
-target_position = Vector2(0, 25)
+[node name="InteractablesShapeCast" type="ShapeCast2D" parent="."]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_jqvg5")
+target_position = Vector2(0, 0)
+max_results = 1
 collision_mask = 8
-hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 
-[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("_currentState")]
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("Player", "_currentState")]
 script = ExtResource("3_5djxm")
+Player = NodePath("..")
 _currentState = NodePath("MovementState")
 
-[node name="MovementState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("_player")]
+[node name="MovementState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("4_6q5dh")
-_player = NodePath("../..")
 
-[node name="ClimbingState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("_player")]
+[node name="ClimbingState" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("5_0xbh4")
-_player = NodePath("../..")
+
+[node name="JumpBoostState" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("6_w5aa8")

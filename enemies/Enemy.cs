@@ -3,8 +3,8 @@ using Godot;
 namespace Platformer;
 
 public partial class Enemy : CharacterBody2D {
-    private int _speed = 120;
-    private Vector2 _direction = Vector2.Right;
+    [Export] private int _speed = 120;
+    [Export] private Vector2 _direction = Vector2.Right;
 
     private RayCast2D _leftLedgeCheck;
     private RayCast2D _rightLedgeCheck;

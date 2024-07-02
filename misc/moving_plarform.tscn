@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bb8i2f5o26kdy"]
+
+[ext_resource type="Script" path="res://misc/MovingPlatform.cs" id="1_vwyba"]
+[ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="2_gil1n"]
+
+[sub_resource type="Curve2D" id="Curve2D_1u3ky"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 517, 0)
+}
+point_count = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yha6h"]
+atlas = ExtResource("2_gil1n")
+region = Rect2(144, 36, 54, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgpj8"]
+size = Vector2(54, 18)
+
+[node name="Path2D" type="Path2D"]
+position = Vector2(374, 45)
+curve = SubResource("Curve2D_1u3ky")
+script = ExtResource("1_vwyba")
+_speed = 20.0
+
+[node name="_PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(13, 0)
+loop = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="_PathFollow2D"]
+remote_path = NodePath("../../_AnimatableBody2D")
+
+[node name="_AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(13, 0)
+collision_layer = 9
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="_AnimatableBody2D"]
+texture = SubResource("AtlasTexture_yha6h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="_AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_mgpj8")

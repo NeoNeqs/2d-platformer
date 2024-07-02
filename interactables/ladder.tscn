@@ -3,4 +3,6 @@
 [ext_resource type="Script" path="res://interactables/Ladder.cs" id="1_d41av"]
 
 [node name="Ladder" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_d41av")

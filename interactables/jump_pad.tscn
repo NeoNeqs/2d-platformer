@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://baigbi44h3ib1"]
+
+[ext_resource type="Script" path="res://interactables/JumpPad.cs" id="1_3urf7"]
+[ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="1_aswle"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tj0h"]
+size = Vector2(18, 4.03)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xliip"]
+atlas = ExtResource("1_aswle")
+region = Rect2(126, 90, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssjm8"]
+atlas = ExtResource("1_aswle")
+region = Rect2(144, 90, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86wg2"]
+atlas = ExtResource("1_aswle")
+region = Rect2(144, 90, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1o4v"]
+atlas = ExtResource("1_aswle")
+region = Rect2(126, 90, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gath3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xliip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssjm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86wg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1o4v")
+}],
+"loop": false,
+"name": &"Spring",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pawrw"]
+size = Vector2(18, 10)
+
+[node name="JumpPad" type="StaticBody2D"]
+
+[node name="TriggerArea" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_3urf7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+shape = SubResource("RectangleShape2D_0tj0h")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="TriggerArea"]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_gath3")
+animation = &"Spring"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_pawrw")

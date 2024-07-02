@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqivblij6ghuh"]
+[gd_scene load_steps=9 format=3 uid="uid://bqivblij6ghuh"]
 
 [ext_resource type="Script" path="res://enemies/Enemy.cs" id="1_aawd5"]
 [ext_resource type="Texture2D" uid="uid://c0rrh4wm1vc5y" path="res://assets/kenney-platformer/tilemap-characters_packed.png" id="2_saja7"]
+[ext_resource type="PackedScene" uid="uid://ddc6gi1bxa6of" path="res://misc/hitbox.tscn" id="3_2f21h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1vha5"]
 atlas = ExtResource("2_saja7")
@@ -28,6 +29,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hxolw"]
 size = Vector2(24, 21)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udhed"]
+size = Vector2(24, 15)
+
 [node name="FlatEnemy" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_aawd5")
@@ -46,3 +50,9 @@ target_position = Vector2(0, 2)
 [node name="RightLedgeCheck" type="RayCast2D" parent="."]
 position = Vector2(11, 11)
 target_position = Vector2(0, 2)
+
+[node name="Hitbox" parent="." instance=ExtResource("3_2f21h")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_udhed")

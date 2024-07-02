@@ -2,6 +2,7 @@ using Godot;
 
 public partial class Level : Node2D {
     [Export] private PackedScene _nextLevel;
+    
     public bool Unlocked;
 
     public void AdvanceLevel() {
