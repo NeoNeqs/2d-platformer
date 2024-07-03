@@ -7,7 +7,7 @@ public partial class SignalBus : Node {
     [Signal]
     public delegate void CoinCollectedEventHandler(ushort coins);
 
-    public static SignalBus Instance;
+    public static SignalBus Instance { private set; get; }
 
     public override void _Ready() {
         Instance = this;

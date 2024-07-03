@@ -49,16 +49,13 @@ public partial class MovementState : State {
         } else {
             ApplyGravity(delta);
             
-            // if (Input.IsActionJustPressed("ui_accept") && _newVelocity.Y < player.MinJumpVelocity) {
-            //     _newVelocity.Y = player.MinJumpVelocity;
-            // }
             player.Sprite.Play("Jump");
         }
 
         return direction;
     }
 
-    private void HandlePushing(Player player, float direction, float delta) {
+    private static void HandlePushing(Player player, float direction, float delta) {
         int collisions = player.GetSlideCollisionCount();
         for (var i = 0; i < collisions; i++) {
             KinematicCollision2D collision = player.GetSlideCollision(i);

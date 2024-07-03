@@ -4,18 +4,18 @@ namespace Platformer;
 
 [GlobalClass]
 public partial class ClimbingState : State {
-    
     private Vector2 _newVelocity;
+
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        
+
         Player player = GetStateMachine().Player;
-        
+
         _newVelocity = player.Velocity;
 
         Vector2 dir = Input.GetVector("left", "right", "up", "down");
         HandleClimbing(player, dir);
-        
+
         player.Velocity = _newVelocity;
         player.MoveAndSlide();
     }
@@ -24,7 +24,7 @@ public partial class ClimbingState : State {
         if (!player.IsOnLadder()) {
             GetStateMachine().ChangeState<MovementState>();
         }
-        
+
         if (dir.X != 0) {
             _newVelocity.X = Mathf.MoveToward(_newVelocity.X, player.Speed * dir.X, 40);
             player.Sprite.Play("Run");

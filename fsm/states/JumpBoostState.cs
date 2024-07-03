@@ -13,12 +13,12 @@ public partial class JumpBoostState : State {
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        
+
         Player player = GetStateMachine().Player;
         if (!player.IsOnJumpPad()) {
             GetStateMachine().ChangeState<MovementState>();
         }
-        
+
         _newVelocity = player.Velocity;
 
         _newVelocity.Y = -400;

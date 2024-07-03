@@ -9,13 +9,13 @@ public partial class Enemy : CharacterBody2D {
     private RayCast2D _leftLedgeCheck;
     private RayCast2D _rightLedgeCheck;
     private AnimatedSprite2D _sprite;
-    
+
     private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
     public override void _Ready() {
+        _sprite = GetNode<AnimatedSprite2D>("Sprite");
         _leftLedgeCheck = GetNode<RayCast2D>("LeftLedgeCheck");
         _rightLedgeCheck = GetNode<RayCast2D>("RightLedgeCheck");
-        _sprite = GetNode<AnimatedSprite2D>("Sprite");
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -29,7 +29,7 @@ public partial class Enemy : CharacterBody2D {
         } else {
             Velocity = _direction * _speed;
         }
-        
+
         MoveAndSlide();
     }
 }

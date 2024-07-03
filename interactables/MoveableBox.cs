@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Platformer;
+
 public partial class MoveableBox : CharacterBody2D {
 
     private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();

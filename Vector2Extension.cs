@@ -9,7 +9,7 @@ public static class Vector2Extension {
 
         result.X = b.X + (a.X - b.X) * scalar;
         result.Y = b.Y + (a.Y - b.Y) * scalar;
-        
+
         return result;
     }
 }
