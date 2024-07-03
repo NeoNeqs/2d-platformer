@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://levels/Level.cs" id="1_8qarh"]
 [ext_resource type="TileSet" uid="uid://db5p5nw5mbdnb" path="res://assets/kenney-platformer/tilemap.tres" id="1_hay5e"]
+[ext_resource type="PackedScene" uid="uid://wi8sqdi5y8c0" path="res://levels/level_the_end.tscn" id="2_eylkw"]
 [ext_resource type="PackedScene" uid="uid://cv3tj5hwyaagd" path="res://player/player.tscn" id="2_o1djl"]
 [ext_resource type="PackedScene" uid="uid://cwro0nn57pnve" path="res://enemies/spike.tscn" id="2_oorw5"]
-[ext_resource type="PackedScene" uid="uid://banunt1p23mkk" path="res://levels/level3.tscn" id="2_yd40t"]
 [ext_resource type="PackedScene" uid="uid://jchqmxlal2r6" path="res://misc/void.tscn" id="3_7s7df"]
 [ext_resource type="PackedScene" uid="uid://bgerdvdon8a6u" path="res://interactables/ladder.tscn" id="4_odicv"]
 [ext_resource type="PackedScene" uid="uid://deo3ifbhmrxxf" path="res://collectables/coin.tscn" id="6_ey6f2"]
@@ -22,11 +22,11 @@ size = Vector2(18, 18)
 size = Vector2(24, 118)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l32m8"]
-size = Vector2(108, 13)
+size = Vector2(90, 18)
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_8qarh")
-_nextLevel = ExtResource("2_yd40t")
+_nextLevel = ExtResource("2_eylkw")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(108, 0)

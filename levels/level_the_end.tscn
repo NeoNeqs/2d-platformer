@@ -1,0 +1,253 @@
+[gd_scene load_steps=15 format=3 uid="uid://wi8sqdi5y8c0"]
+
+[ext_resource type="Script" path="res://levels/Level.cs" id="1_rojvx"]
+[ext_resource type="TileSet" uid="uid://db5p5nw5mbdnb" path="res://assets/kenney-platformer/tilemap.tres" id="2_aw2an"]
+[ext_resource type="PackedScene" uid="uid://cv3tj5hwyaagd" path="res://player/player.tscn" id="3_pcl1e"]
+[ext_resource type="PackedScene" uid="uid://jchqmxlal2r6" path="res://misc/void.tscn" id="4_7mtkf"]
+[ext_resource type="Texture2D" uid="uid://c8tvkwno2dxl7" path="res://assets/kenney-platformer/tilemap_packed.png" id="5_g347a"]
+[ext_resource type="PackedScene" uid="uid://cyyr73wxkl8qr" path="res://interactables/exit_doors.tscn" id="6_icad5"]
+[ext_resource type="PackedScene" uid="uid://baigbi44h3ib1" path="res://interactables/jump_pad.tscn" id="6_k243x"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dc46f"]
+viewport_path = NodePath("Sprite2D/SubViewport")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmbtw"]
+atlas = ExtResource("5_g347a")
+region = Rect2(18, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t030c"]
+atlas = ExtResource("5_g347a")
+region = Rect2(36, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdkwd"]
+atlas = ExtResource("5_g347a")
+region = Rect2(54, 0, 18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8csl8"]
+size = Vector2(90, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ti3m6"]
+size = Vector2(54.0702, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdgjb"]
+size = Vector2(90, 18)
+
+[node name="LevelTheEnd" type="Node2D"]
+script = ExtResource("1_rojvx")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_aw2an")
+format = 2
+layer_0/tile_data = PackedInt32Array(589823, 65537, 0, 524288, 131073, 0, 524289, 131073, 0, 524290, 131073, 0, 524291, 131073, 0, 524292, 131073, 0, 524293, 131073, 0, 524294, 131073, 0, 524295, 131073, 0, 524296, 131073, 0, 524297, 131073, 0, 524298, 131073, 0, 524299, 131073, 0, 524300, 131073, 0, 524301, 131073, 0, 524302, 131073, 0, 524303, 131073, 0, 524305, 131073, 0, 524306, 131073, 0, 524307, 131073, 0, 524308, 131073, 0, 524309, 131073, 0, 524310, 131073, 0, 524311, 131073, 0, 524312, 131073, 0, 524313, 131073, 0, 524314, 131073, 0, 524315, 131073, 0, 524316, 131073, 0, 524317, 131073, 0, 524318, 131073, 0, 524319, 131073, 0, 524320, 131073, 0, 524321, 131073, 0, 524322, 131073, 0, 524323, 131073, 0, 524324, 131073, 0, 524325, 131073, 0, 524326, 131073, 0, 524327, 131073, 0, 524328, 131073, 0, 524329, 131073, 0, 524330, 196609, 0, 524304, 131073, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_pcl1e")]
+
+[node name="Void" parent="." instance=ExtResource("4_7mtkf")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(171, -63)
+texture = SubResource("ViewportTexture_dc46f")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite2D"]
+disable_3d = true
+size = Vector2i(67, 70)
+
+[node name="Label" type="RichTextLabel" parent="Sprite2D/SubViewport"]
+custom_minimum_size = Vector2(100, 70)
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Thanks
+   For
+Playing"
+
+[node name="OneWayPlatformLong" type="StaticBody2D" parent="."]
+position = Vector2(153.414, 117.432)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="OneWayPlatformLong"]
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_dmbtw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="OneWayPlatformLong"]
+position = Vector2(-18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D4" type="Sprite2D" parent="OneWayPlatformLong"]
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D5" type="Sprite2D" parent="OneWayPlatformLong"]
+position = Vector2(18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OneWayPlatformLong"]
+position = Vector2(36, 0)
+texture = SubResource("AtlasTexture_gdkwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatformLong"]
+shape = SubResource("RectangleShape2D_8csl8")
+one_way_collision = true
+
+[node name="ExitDoors" parent="OneWayPlatformLong" instance=ExtResource("6_icad5")]
+position = Vector2(0.845703, -26.5097)
+
+[node name="OneWayPlatformShort" type="StaticBody2D" parent="."]
+position = Vector2(297, 81)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="OneWayPlatformShort"]
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_dmbtw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="OneWayPlatformShort"]
+position = Vector2(-18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OneWayPlatformShort"]
+texture = SubResource("AtlasTexture_gdkwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatformShort"]
+position = Vector2(-17.9649, 0)
+shape = SubResource("RectangleShape2D_ti3m6")
+one_way_collision = true
+
+[node name="OneWayPlatformShort3" type="StaticBody2D" parent="."]
+position = Vector2(315, -63)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="OneWayPlatformShort3"]
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_dmbtw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="OneWayPlatformShort3"]
+position = Vector2(-18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OneWayPlatformShort3"]
+texture = SubResource("AtlasTexture_gdkwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatformShort3"]
+position = Vector2(-17.9649, 0)
+shape = SubResource("RectangleShape2D_ti3m6")
+one_way_collision = true
+
+[node name="OneWayPlatformShort2" type="StaticBody2D" parent="."]
+position = Vector2(315, 9)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="OneWayPlatformShort2"]
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_dmbtw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="OneWayPlatformShort2"]
+position = Vector2(-18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OneWayPlatformShort2"]
+texture = SubResource("AtlasTexture_gdkwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatformShort2"]
+position = Vector2(-17.9649, 0)
+shape = SubResource("RectangleShape2D_ti3m6")
+one_way_collision = true
+
+[node name="OneWayPlatformLong2" type="StaticBody2D" parent="."]
+position = Vector2(405, 81)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="OneWayPlatformLong2"]
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_dmbtw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="OneWayPlatformLong2"]
+position = Vector2(-18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D4" type="Sprite2D" parent="OneWayPlatformLong2"]
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D5" type="Sprite2D" parent="OneWayPlatformLong2"]
+position = Vector2(18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OneWayPlatformLong2"]
+position = Vector2(36, 0)
+texture = SubResource("AtlasTexture_gdkwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatformLong2"]
+shape = SubResource("RectangleShape2D_wdgjb")
+one_way_collision = true
+
+[node name="ExitDoors2" parent="OneWayPlatformLong2" instance=ExtResource("6_icad5")]
+position = Vector2(0, -26.589)
+
+[node name="OneWayPlatformLong3" type="StaticBody2D" parent="."]
+position = Vector2(171, 45)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="OneWayPlatformLong3"]
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_dmbtw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="OneWayPlatformLong3"]
+position = Vector2(-18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D4" type="Sprite2D" parent="OneWayPlatformLong3"]
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D5" type="Sprite2D" parent="OneWayPlatformLong3"]
+position = Vector2(18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OneWayPlatformLong3"]
+position = Vector2(36, 0)
+texture = SubResource("AtlasTexture_gdkwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatformLong3"]
+shape = SubResource("RectangleShape2D_wdgjb")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OneWayPlatformLong3"]
+shape = SubResource("RectangleShape2D_wdgjb")
+one_way_collision = true
+
+[node name="ExitDoors3" parent="OneWayPlatformLong3" instance=ExtResource("6_icad5")]
+position = Vector2(0.187286, -26.7822)
+
+[node name="OneWayPlatformLong4" type="StaticBody2D" parent="."]
+position = Vector2(423, -27)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="OneWayPlatformLong4"]
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_dmbtw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="OneWayPlatformLong4"]
+position = Vector2(-18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D4" type="Sprite2D" parent="OneWayPlatformLong4"]
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D5" type="Sprite2D" parent="OneWayPlatformLong4"]
+position = Vector2(18, 0)
+texture = SubResource("AtlasTexture_t030c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="OneWayPlatformLong4"]
+position = Vector2(36, 0)
+texture = SubResource("AtlasTexture_gdkwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayPlatformLong4"]
+shape = SubResource("RectangleShape2D_wdgjb")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="OneWayPlatformLong4"]
+shape = SubResource("RectangleShape2D_wdgjb")
+one_way_collision = true
+
+[node name="ExitDoors4" parent="OneWayPlatformLong4" instance=ExtResource("6_icad5")]
+position = Vector2(0.374573, -26.7822)
+
+[node name="JumpPad" parent="." instance=ExtResource("6_k243x")]
+position = Vector2(297, -81)
